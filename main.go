@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/labstack/echo/v4"
 	"log"
+	"net/http"
 	"ranker-go/glicko_go"
+	"ranker-go/routes"
+	"ranker-go/schema"
 )
 
-func main() {
+func test() {
 	fmt.Println("Hello, World!")
 	p1 := glicko_go.Glicko2From1(glicko_go.Glicko1{
 		Rating: 1500,
@@ -45,4 +49,19 @@ func main() {
 
 	p1AsG1 := glicko_go.Glicko1From2(pF)
 	fmt.Printf("Rating: %f, sigma %f, RD: %f\n", p1AsG1.Rating, p1AsG1.Sigma, p1AsG1.Rd)
+}
+
+func main() {
+	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World")
+	})
+	competitorGroup := e.Group("/competitor")
+	routes.AddCompetitorRoutes(competitorGroup)
+	err := schema.Open()
+	if err != nil {
+		panic("failed to open database connection")
+	}
+
+	e.Logger.Fatal(e.Start(":2997"))
 }
