@@ -126,7 +126,7 @@ func (gCur Glicko2) updateGlicko2Vars(phiStar float64, v float64, gOpponents []G
 
 func (gCur Glicko2) ProcessMatches(gOpps []Glicko2, scores []float64) (Glicko2, error) {
 	if len(gOpps) != len(scores) {
-		return Glicko2{}, errors.New("")
+		return Glicko2{}, errors.New("arrays must be the same length")
 	}
 	delta := computeDelta(gCur, gOpps, scores)
 	v := computeV(gCur, gOpps)

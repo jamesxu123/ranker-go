@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"ranker-go/glicko_go"
 )
 
@@ -37,7 +38,7 @@ func main() {
 	pF, err := p1.ProcessMatches(opps, scores)
 
 	if err != nil {
-		return
+		log.Fatalln(err)
 	}
 
 	fmt.Printf("mu: %f, sigma %f, phi: %f\n", pF.Mu, pF.Sigma, pF.Phi)
