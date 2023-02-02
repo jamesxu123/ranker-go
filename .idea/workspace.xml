@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="fix">
-      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/competitors.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schema/actors.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schema/scheduling.go" afterDir="false" />
+    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="add and get competitors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scheduling.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/scheduling.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +83,7 @@
       <workItem from="1675298984814" duration="10538000" />
       <workItem from="1675351113126" duration="591000" />
       <workItem from="1675355272507" duration="9000" />
-      <workItem from="1675356886899" duration="6531000" />
+      <workItem from="1675356886899" duration="10213000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1675307333522</created>
@@ -122,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675310610525</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add and get competitors">
+      <created>1675365389883</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1675365389883</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +150,8 @@
     <MESSAGE value="improve error handling" />
     <MESSAGE value="gitignore" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="add and get competitors" />
+    <option name="LAST_COMMIT_MESSAGE" value="add and get competitors" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

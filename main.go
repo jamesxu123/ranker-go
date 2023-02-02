@@ -63,5 +63,10 @@ func main() {
 		panic("failed to open database connection")
 	}
 
+	redisErr := schema.RedisOpen("redis://localhost:6379")
+	if redisErr != nil {
+		panic(redisErr)
+	}
+
 	e.Logger.Fatal(e.Start(":2997"))
 }
