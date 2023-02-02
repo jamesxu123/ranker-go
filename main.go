@@ -34,7 +34,11 @@ func main() {
 	scores := []float64{glicko_go.WIN, glicko_go.LOSE, glicko_go.LOSE}
 	opps := []glicko_go.Glicko2{o1, o2, o3}
 
-	pF := p1.ProcessMatches(opps, scores)
+	pF, err := p1.ProcessMatches(opps, scores)
+
+	if err != nil {
+		return
+	}
 
 	fmt.Printf("mu: %f, sigma %f, phi: %f\n", pF.Mu, pF.Sigma, pF.Phi)
 
