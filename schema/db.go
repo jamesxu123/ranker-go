@@ -25,6 +25,10 @@ func RedisOpen(connectionString string) error {
 		return err
 	}
 	RDB = redis.NewClient(opt)
+	_, err = RDB.Ping(context.Background()).Result()
+	if err != nil {
+		return err
+	}
 	initRedis(RDB)
 	return nil
 }

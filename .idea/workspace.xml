@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="basic init scheduling">
-      <change afterPath="$PROJECT_DIR$/lib/scheduling_test.go" afterDir="false" />
+    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="fixed make array logic error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scheduling.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/actors.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/actors.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +62,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.go test ranker-go/lib">
+  <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="ranker-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -126,7 +130,8 @@
       <workItem from="1675378101303" duration="86000" />
       <workItem from="1675378193666" duration="63000" />
       <workItem from="1675395786866" duration="5232000" />
-      <workItem from="1675443910809" duration="654000" />
+      <workItem from="1675443910809" duration="1465000" />
+      <workItem from="1675454513298" duration="6468000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1675307333522</created>
@@ -184,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675401018817</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed make array logic error">
+      <created>1675444904820</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1675444904820</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +222,8 @@
     <MESSAGE value="add and get competitors" />
     <MESSAGE value="redis stuff" />
     <MESSAGE value="basic init scheduling" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic init scheduling" />
+    <MESSAGE value="fixed make array logic error" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed make array logic error" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

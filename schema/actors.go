@@ -27,7 +27,7 @@ func (c *Competitor) CreateInDb() error {
 
 func findCompetitorByID(id uint) (Competitor, error) {
 	var c Competitor
-	DB.Find(&c, id)
+	DB.First(&c, id) // only get the first
 	err := DB.Error
 	return c, err
 }
