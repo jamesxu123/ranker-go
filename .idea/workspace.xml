@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="redis stuff">
-      <change afterPath="$PROJECT_DIR$/routes/match_scheduler.go" afterDir="false" />
+    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="basic init scheduling">
+      <change afterPath="$PROJECT_DIR$/lib/scheduling_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/scheduling.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/actors.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/actors.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +58,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Test.go test ranker-go/lib">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="ranker-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -71,6 +67,48 @@
       <filePath value="$PROJECT_DIR$/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="TestCreateInitialMatches in ranker-go/lib" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="ranker-go" />
+      <working_directory value="$PROJECT_DIR$/lib" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="ranker-go/lib" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestCreateInitialMatches\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGenerateRandomPairs in ranker-go/lib" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="ranker-go" />
+      <working_directory value="$PROJECT_DIR$/lib" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="ranker-go/lib" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGenerateRandomPairs\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test ranker-go/lib" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="ranker-go" />
+      <working_directory value="$PROJECT_DIR$/lib" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="ranker-go/lib" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.go test ranker-go/lib" />
+        <item itemvalue="Go Test.TestCreateInitialMatches in ranker-go/lib" />
+        <item itemvalue="Go Test.TestGenerateRandomPairs in ranker-go/lib" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -87,7 +125,8 @@
       <workItem from="1675372317892" duration="50000" />
       <workItem from="1675378101303" duration="86000" />
       <workItem from="1675378193666" duration="63000" />
-      <workItem from="1675395786866" duration="4991000" />
+      <workItem from="1675395786866" duration="5232000" />
+      <workItem from="1675443910809" duration="654000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1675307333522</created>
@@ -138,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675370274499</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="basic init scheduling">
+      <created>1675401018817</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1675401018817</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +209,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="add and get competitors" />
     <MESSAGE value="redis stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="redis stuff" />
+    <MESSAGE value="basic init scheduling" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic init scheduling" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

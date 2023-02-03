@@ -111,7 +111,7 @@ func createInitialMatches(persons []schema.Competitor, initRounds int) ([]schema
 	if initRounds < 1 {
 		return nil, errors.New("initRounds must be at least 1")
 	}
-	matches := make([]schema.MatchPair, len(persons)*initRounds)
+	matches := make([]schema.MatchPair, 0)
 	for i := 0; i < initRounds; i++ {
 		matches = append(matches, genRandomPairs(persons)...)
 	}
