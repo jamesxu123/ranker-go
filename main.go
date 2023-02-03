@@ -58,6 +58,10 @@ func main() {
 	})
 	competitorGroup := e.Group("/competitor")
 	routes.AddCompetitorRoutes(competitorGroup)
+
+	matchSchedulerGroup := e.Group("/match_scheduler")
+	routes.AddMatchScheduler(matchSchedulerGroup)
+
 	err := schema.Open()
 	if err != nil {
 		panic("failed to open database connection")

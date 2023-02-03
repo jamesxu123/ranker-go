@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="add and get competitors">
+    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="redis stuff">
+      <change afterPath="$PROJECT_DIR$/routes/match_scheduler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/scheduling.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/actors.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/actors.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schema/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/scheduling.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +52,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -83,7 +83,11 @@
       <workItem from="1675298984814" duration="10538000" />
       <workItem from="1675351113126" duration="591000" />
       <workItem from="1675355272507" duration="9000" />
-      <workItem from="1675356886899" duration="10213000" />
+      <workItem from="1675356886899" duration="10227000" />
+      <workItem from="1675372317892" duration="50000" />
+      <workItem from="1675378101303" duration="86000" />
+      <workItem from="1675378193666" duration="63000" />
+      <workItem from="1675395786866" duration="4991000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1675307333522</created>
@@ -127,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675365389883</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="redis stuff">
+      <created>1675370274499</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675370274499</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,7 +162,8 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="fix" />
     <MESSAGE value="add and get competitors" />
-    <option name="LAST_COMMIT_MESSAGE" value="add and get competitors" />
+    <MESSAGE value="redis stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="redis stuff" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

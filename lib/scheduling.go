@@ -10,28 +10,101 @@ import (
 	"time"
 )
 
+const maxRetries = 1000
+
+func GetAllMatches() ([]schema.MatchPair, error) {
+	matches := make([]schema.MatchPair, 0)
+	ctx := context.Background()
+	iter := schema.RDB.Scan(ctx, 0, "match:*", 0).Iterator()
+	for iter.Next(ctx) {
+		key := iter.Val()
+		var model schema.RedisMatchPair
+		err := schema.RDB.HGetAll(ctx, key).Scan(&model)
+		if err != nil {
+			return nil, err
+		}
+		mp, cErr := model.CreateMatchPair(key)
+		if cErr != nil {
+			return nil, cErr
+		}
+		matches = append(matches, mp)
+	}
+	return matches, nil
+}
+
+func DeleteAllMatches() error {
+	ctx := context.Background()
+
+	iter := schema.RDB.Scan(ctx, 0, "match:*", 0).Iterator()
+	for iter.Next(ctx) {
+		key := iter.Val()
+		schema.RDB.Del(ctx, key)
+	}
+	return nil
+
+	//cmds, err := schema.RDB.Pipelined(ctx, func(pipe redis.Pipeliner) error {
+	//	iter := pipe.Scan(ctx, 0, "match:*", 0).Iterator()
+	//	for iter.Next(ctx) {
+	//		key := iter.Val()
+	//		pipe.Del(ctx, key)
+	//	}
+	//	return nil
+	//})
+	//
+	//for _, cmd := range cmds {
+	//	fmt.Println(cmd.(*redis.ScanCmd).Val())
+	//}
+
+	//return err
+}
+
 func SeedStart(persons []schema.Competitor, initRounds int) error {
 	matches, err := createInitialMatches(persons, initRounds)
 	if err != nil {
 		return err
 	}
 
-	// TODO: add status watch/check
-
 	ctx := context.Background()
-	_, rerr := schema.RDB.Pipelined(ctx, func(rdb redis.Pipeliner) error {
-		for _, match := range matches {
-			schema.RDB.HSet(ctx, match.MatchPairID, "competitor1", match.Competitor1.ID)
-			schema.RDB.HSet(ctx, match.MatchPairID, "competitor2", match.Competitor2.ID)
-			schema.RDB.HSet(ctx, match.MatchPairID, "taken", false) // 0
+
+	txf := func(tx *redis.Tx) error {
+		state, err := tx.Get(ctx, "settings:scheduler-state").Result()
+		if err != nil {
+			return err
 		}
-		return nil
-	})
-	if rerr != nil {
-		return rerr
+		if state != schema.StateNone {
+			return errors.New("settings:scheduler-state has changed")
+		}
+
+		state = schema.StateInit
+
+		_, err = tx.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
+			for _, match := range matches {
+				pipe.HSet(ctx, "match:"+match.MatchPairID, "competitor1", match.Competitor1.ID)
+				pipe.HSet(ctx, "match:"+match.MatchPairID, "competitor2", match.Competitor2.ID)
+				pipe.HSet(ctx, "match:"+match.MatchPairID, "taken", false) // 0
+			}
+			pipe.Set(ctx, "settings:scheduler-state", state, 0)
+			return nil
+		})
+		return err
 	}
 
-	return nil
+	// Retry if the key has been changed.
+	for i := 0; i < maxRetries; i++ {
+		err := schema.RDB.Watch(ctx, txf, "settings:scheduler-state")
+		if err == nil {
+			// Success.
+			return nil
+		}
+		if err == redis.TxFailedErr {
+			// Optimistic lock lost. Retry.
+			continue
+		}
+		// Return any other error.
+		return err
+	}
+
+	return errors.New("increment reached maximum number of retries")
 }
 
 func createInitialMatches(persons []schema.Competitor, initRounds int) ([]schema.MatchPair, error) {
@@ -47,20 +120,23 @@ func createInitialMatches(persons []schema.Competitor, initRounds int) ([]schema
 
 func genRandomPairs(persons []schema.Competitor) []schema.MatchPair {
 
+	clonedPersons := make([]schema.Competitor, len(persons))
+	copy(clonedPersons, persons)
+
 	rand.Seed(time.Now().UnixNano())
-	rand.Shuffle(len(persons), func(i, j int) { persons[i], persons[j] = persons[j], persons[i] })
+	rand.Shuffle(len(clonedPersons), func(i, j int) { clonedPersons[i], clonedPersons[j] = clonedPersons[j], clonedPersons[i] })
 
 	if len(persons)%2 != 0 {
-		persons = append(persons, persons[0])
+		clonedPersons = append(clonedPersons, clonedPersons[0])
 	}
 
-	pairedLunches := make([]schema.MatchPair, len(persons)/2)
+	pairedLunches := make([]schema.MatchPair, len(clonedPersons)/2)
 
-	for i, person := range persons[:len(persons)/2] {
+	for i, person := range clonedPersons[:len(clonedPersons)/2] { // TODO: Bug over here, empty elements
 		pairedLunches[i] = schema.MatchPair{
 			MatchPairID: uuid.New().String(),
 			Competitor1: person,
-			Competitor2: persons[len(persons)-1-i],
+			Competitor2: clonedPersons[len(persons)-1-i],
 		}
 	}
 
