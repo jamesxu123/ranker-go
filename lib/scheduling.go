@@ -65,21 +65,6 @@ func DeleteAllMatches() error {
 		}(key)
 	}
 	return nil
-
-	//cmds, err := schema.RDB.Pipelined(ctx, func(pipe redis.Pipeliner) error {
-	//	iter := pipe.Scan(ctx, 0, "match:*", 0).Iterator()
-	//	for iter.Next(ctx) {
-	//		key := iter.Val()
-	//		pipe.Del(ctx, key)
-	//	}
-	//	return nil
-	//})
-	//
-	//for _, cmd := range cmds {
-	//	fmt.Println(cmd.(*redis.ScanCmd).Val())
-	//}
-
-	//return err
 }
 
 func SeedStart(persons []schema.Competitor, initRounds int) error {
@@ -89,10 +74,18 @@ func SeedStart(persons []schema.Competitor, initRounds int) error {
 	}
 
 	return stateTransition(schema.StateNone, schema.StateInit, func(ctx context.Context, pipe redis.Pipeliner) error {
+		for i := range persons {
+			pipe.ZAdd(ctx, "scheduler:competitors", redis.Z{Score: 0, Member: persons[i].ID})
+		}
+
 		for _, match := range matches {
 			pipe.HSet(ctx, "match:"+match.MatchPairID, "competitor1", match.Competitor1.ID)
 			pipe.HSet(ctx, "match:"+match.MatchPairID, "competitor2", match.Competitor2.ID)
 			pipe.HSet(ctx, "match:"+match.MatchPairID, "taken", false) // 0
+			pipe.ZAdd(ctx, "scheduler:assignment_status", redis.Z{
+				Score:  0,
+				Member: match.MatchPairID,
+			})
 		}
 		return nil
 	})
@@ -139,24 +132,65 @@ func SetSchedulerState(newState string) {
 	schema.RDB.Set(context.Background(), settingsKey, newState, 0)
 }
 
-func DetermineCurrentState() error {
+func DetermineCurrentState() (string, error) {
 	// TODO: pass message from TX to main function
 	ctx := context.Background()
+	s := make(chan string)
 	txf := func(tx *redis.Tx) error {
 		currentRDBState, err := tx.Get(ctx, settingsKey).Result()
 		if err != nil {
 			//return "", err
+			return err
 		}
 		switch currentRDBState {
 		case schema.StateNone:
-			//return schema.StateNone, err
+			s <- schema.StateNone
 		case schema.StateInit:
-
+			iter := tx.Scan(ctx, 0, "match:*", 0).Iterator()
+			if iter.Next(ctx) == false {
+				s <- schema.StateContinuous
+			} else {
+				s <- schema.StateInit
+			}
+		case schema.StateContinuous:
+			s <- schema.StateContinuous
 		}
+		return nil
+	}
+	err := make(chan error)
+	go func() {
+		err <- schema.RedisRetryWithWatch(ctx, txf, settingsKey, maxRetries)
+	}()
+	return <-s, <-err
+}
+
+func GetMatchForJudge() error {
+	// TODO: in progress
+	ctx := context.Background()
+
+	state, err := schema.RDB.Get(ctx, settingsKey).Result()
+	if err != nil {
 		return err
 	}
 
-	return schema.RedisRetryWithWatch(ctx, txf, settingsKey, maxRetries)
+	switch state {
+	case schema.StateInit:
+		// logic as follows
+		// 1. rank using scheduler:assignment_status the matches that have had the least hits
+		// 2. if not marked, mark the match as taken in match:* and increment assignment_status. Do this atomically
+		// 3. increment scheduler:competitors for each person in the match
+		// 4. profit
+	case schema.StateContinuous:
+		// logic as follows
+		// 1. need some logic about cleaning up the matches that have been abandoned? maybe at a later date
+		// 2. find the competitor with the highest variation or lowest confidence
+		// 3. pair with the closest score
+		// 4. add this to the list of matches and assignment_status. do this atomically
+	case schema.StateFinishing:
+		// clean up first by ranking in assignment_status by least and completing all the 0 ones
+		// terminate
+	}
+	return nil
 }
 
 func genRandomPairs(persons []schema.Competitor) []schema.MatchPair {

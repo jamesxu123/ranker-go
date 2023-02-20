@@ -9,8 +9,11 @@ import (
 )
 
 const (
-	StateInit string = "state_init"
-	StateNone string = "state_none"
+	StateInit       string = "state_init"
+	StateNone       string = "state_none"
+	StateContinuous string = "state_continuous"
+	StateFinishing  string = "state_finishing"
+	StateEnd        string = "state_end"
 )
 
 var DB *gorm.DB
