@@ -12,7 +12,7 @@ import (
 )
 
 const maxRetries = 1000
-const settingsKey = "settings:scheduler-state"
+const settingsKey = "settings:scheduler-state" // for future, this should be stored elsewhere
 
 func GetAllMatches() ([]schema.MatchPair, error) {
 	matches := make([]schema.MatchPair, 0)

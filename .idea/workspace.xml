@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="use goroutines for bulk actions">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/scheduling.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/match_scheduler.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/match_scheduler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
-    </list>
+    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="add reset state" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -151,7 +146,7 @@
       <workItem from="1675454513298" duration="6520000" />
       <workItem from="1676751949389" duration="63000" />
       <workItem from="1676752018871" duration="119000" />
-      <workItem from="1676908159868" duration="864000" />
+      <workItem from="1676908159868" duration="1336000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1675307333522</created>
@@ -223,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675464250761</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add reset state">
+      <created>1676909478148</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676909478148</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +253,8 @@
     <MESSAGE value="basic init scheduling" />
     <MESSAGE value="fixed make array logic error" />
     <MESSAGE value="use goroutines for bulk actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="use goroutines for bulk actions" />
+    <MESSAGE value="add reset state" />
+    <option name="LAST_COMMIT_MESSAGE" value="add reset state" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
