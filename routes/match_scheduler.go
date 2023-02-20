@@ -24,6 +24,11 @@ func startSchedulerHandler(c echo.Context) error {
 	return c.String(http.StatusOK, "matches scheduled")
 }
 
+func resetScheduler(c echo.Context) error {
+	lib.SetSchedulerState(schema.StateNone)
+	return c.String(http.StatusOK, "scheduler reset")
+}
+
 func getAllMatchesHandler(c echo.Context) error {
 	matches, err := lib.GetAllMatches()
 	if err != nil {
@@ -42,6 +47,7 @@ func deleteAllMatchesHandler(c echo.Context) error {
 
 func AddMatchScheduler(group *echo.Group) {
 	group.POST("/start", startSchedulerHandler)
-	group.GET("/all", getAllMatchesHandler)
-	group.DELETE("/all", deleteAllMatchesHandler)
+	group.PUT("/state/reset", resetScheduler)
+	group.GET("/matches/all", getAllMatchesHandler)
+	group.DELETE("/matches/all", deleteAllMatchesHandler)
 }

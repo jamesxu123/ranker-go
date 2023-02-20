@@ -2,6 +2,7 @@ package schema
 
 import (
 	"context"
+	"errors"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -41,4 +42,22 @@ func Open() error {
 	}
 	DB = db
 	return nil
+}
+
+func RedisRetryWithWatch(ctx context.Context, txf func(tx *redis.Tx) error, key string, maxRetries int) error {
+	// Retry if the key has been changed.
+	for i := 0; i < maxRetries; i++ {
+		err := RDB.Watch(ctx, txf, key)
+		if err == nil {
+			// Success.
+			return nil
+		}
+		if err == redis.TxFailedErr {
+			// Optimistic lock lost. Retry.
+			continue
+		}
+		// Return any other error.
+		return err
+	}
+	return errors.New("increment reached maximum number of retries")
 }

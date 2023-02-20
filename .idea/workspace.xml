@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="fixed make array logic error">
+    <list default="true" id="a4813552-8df7-4035-88e2-df987deb11dc" name="Changes" comment="use goroutines for bulk actions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/scheduling.go" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scheduling.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/actors.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/actors.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/match_scheduler.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/match_scheduler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schema/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/schema/db.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +23,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///opt/homebrew/Cellar/go/1.19.5/libexec" />
+  <component name="GOROOT" url="file:///opt/homebrew/Cellar/go/1.19.6/libexec" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -63,6 +61,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build main.go">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="ranker-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="ranker-go" />
       <working_directory value="$PROJECT_DIR$" />
@@ -93,6 +100,16 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestGenerateRandomPairs\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="ranker-go" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <configuration name="go test ranker-go/lib" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -131,7 +148,10 @@
       <workItem from="1675378193666" duration="63000" />
       <workItem from="1675395786866" duration="5232000" />
       <workItem from="1675443910809" duration="1465000" />
-      <workItem from="1675454513298" duration="6468000" />
+      <workItem from="1675454513298" duration="6520000" />
+      <workItem from="1676751949389" duration="63000" />
+      <workItem from="1676752018871" duration="119000" />
+      <workItem from="1676908159868" duration="864000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1675307333522</created>
@@ -196,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675444904820</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="use goroutines for bulk actions">
+      <created>1675464250761</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1675464250761</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,7 +250,8 @@
     <MESSAGE value="redis stuff" />
     <MESSAGE value="basic init scheduling" />
     <MESSAGE value="fixed make array logic error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed make array logic error" />
+    <MESSAGE value="use goroutines for bulk actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="use goroutines for bulk actions" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

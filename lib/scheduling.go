@@ -132,22 +132,11 @@ func stateTransition(state0 string, state1 string, fn func(ctx context.Context, 
 		return err
 	}
 
-	// Retry if the key has been changed.
-	for i := 0; i < maxRetries; i++ {
-		err := schema.RDB.Watch(ctx, txf, settingsKey)
-		if err == nil {
-			// Success.
-			return nil
-		}
-		if err == redis.TxFailedErr {
-			// Optimistic lock lost. Retry.
-			continue
-		}
-		// Return any other error.
-		return err
-	}
+	return schema.RedisRetryWithWatch(ctx, txf, settingsKey, maxRetries)
+}
 
-	return errors.New("increment reached maximum number of retries")
+func SetSchedulerState(newState string) {
+	schema.RDB.Set(context.Background(), settingsKey, newState, 0)
 }
 
 func DetermineCurrentState() error {
@@ -167,22 +156,7 @@ func DetermineCurrentState() error {
 		return err
 	}
 
-	// Retry if the key has been changed.
-	for i := 0; i < maxRetries; i++ {
-		err := schema.RDB.Watch(ctx, txf, settingsKey)
-		if err == nil {
-			// Success.
-			return nil
-		}
-		if err == redis.TxFailedErr {
-			// Optimistic lock lost. Retry.
-			continue
-		}
-		// Return any other error.
-		return err
-	}
-
-	return errors.New("increment reached maximum number of retries")
+	return schema.RedisRetryWithWatch(ctx, txf, settingsKey, maxRetries)
 }
 
 func genRandomPairs(persons []schema.Competitor) []schema.MatchPair {
@@ -199,7 +173,7 @@ func genRandomPairs(persons []schema.Competitor) []schema.MatchPair {
 
 	pairedLunches := make([]schema.MatchPair, len(clonedPersons)/2)
 
-	for i, person := range clonedPersons[:len(clonedPersons)/2] { // TODO: Bug over here, empty elements
+	for i, person := range clonedPersons[:len(clonedPersons)/2] {
 		pairedLunches[i] = schema.MatchPair{
 			MatchPairID: uuid.New().String(),
 			Competitor1: person,
